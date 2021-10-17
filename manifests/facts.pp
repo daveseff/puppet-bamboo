@@ -2,8 +2,6 @@
 #
 class bamboo::facts {
 
-  assert_private()
-
   case $bamboo::facts_ensure {
     'absent': { $file_ensure = 'absent' }
     default: { $file_ensure = 'file' }
