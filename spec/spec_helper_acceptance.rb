@@ -8,7 +8,7 @@ require 'spec_vars' if File.file?(File.join(File.dirname(__FILE__), 'spec_vars.r
 
 run_puppet_install_helper
 configure_type_defaults_on(hosts)
-install_ca_certs unless ENV['PUPPET_INSTALL_TYPE'] =~ %r{pe}i
+install_ca_certs unless %r{pe}i.match?(ENV['PUPPET_INSTALL_TYPE'])
 install_module_on(hosts)
 install_module_dependencies_on(hosts)
 

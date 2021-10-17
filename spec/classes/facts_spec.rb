@@ -29,7 +29,7 @@ describe 'bamboo' do
                 it do
                   is_expected.to contain_file('/opt/puppetlabs/facter/facts.d/bamboo_facts.txt').with(
                     ensure: 'file',
-                    content: %r{^bamboo_version=#{BAMBOO_VERSION}$},
+                    content: %r{^bamboo_version=#{BAMBOO_VERSION}$}o,
                   )
                 end
 
@@ -55,7 +55,7 @@ describe 'bamboo' do
               it do
                 is_expected.to contain_file('/etc/puppetlabs/facter/facts.d/bamboo_facts.txt').with(
                   ensure: 'file',
-                  content: %r{^bamboo_version=#{BAMBOO_VERSION}$},
+                  content: %r{^bamboo_version=#{BAMBOO_VERSION}$}o,
                 )
               end
             end
