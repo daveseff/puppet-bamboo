@@ -237,7 +237,7 @@
 #   Defaults to `md5`
 #
 class bamboo (
-  Pattern[/^\d+\.\d+\.\d+(\.\d+)?$/]     $version               = '7.1.4',
+  Pattern[/^\d+\.\d+\.\d+(\.\d+)?$/]     $version               = '8.0.3',
   Enum['tar.gz', 'zip']                  $extension             = 'tar.gz',
   Boolean                                $manage_installdir     = true,
   Stdlib::Unixpath                       $installdir            = '/usr/local/bamboo',
