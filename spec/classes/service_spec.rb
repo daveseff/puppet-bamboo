@@ -38,7 +38,7 @@ describe 'bamboo' do
             if systemd == true
               it do
                 is_expected.to contain_file(systemd_file)
-                  .with_content(%r{^PIDFile=\/usr\/local\/bamboo\/atlassian-bamboo-#{BAMBOO_VERSION}\/work\/catalina\.pid$})
+                  .with_content(%r{^PIDFile=\/usr\/local\/bamboo\/atlassian-bamboo-#{BAMBOO_VERSION}\/work\/catalina\.pid$}o)
                   .with_content(%r{^Environment="UMASK="$})
               end
 
@@ -48,7 +48,7 @@ describe 'bamboo' do
             else
               it do
                 is_expected.to contain_file('/etc/init.d/bamboo')
-                  .with_content(%r{^export CATALINA_HOME=\/usr\/local\/bamboo\/atlassian-bamboo-#{BAMBOO_VERSION}$})
+                  .with_content(%r{^export CATALINA_HOME=\/usr\/local\/bamboo\/atlassian-bamboo-#{BAMBOO_VERSION}$}o)
                   .with_content(%r{^export UMASK=$})
               end
             end
