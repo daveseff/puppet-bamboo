@@ -5,59 +5,26 @@ class bamboo::params {
   case $facts['osfamily'] {
     'RedHat': {
       $initconfig_path = '/etc/sysconfig/bamboo'
-      if $facts['operatingsystemmajrelease'] == '7' {
-        $service_file      = '/usr/lib/systemd/system/bamboo.service'
-        $service_template  = 'bamboo/bamboo.service.erb'
-        $reload_systemd    = true
-        $service_file_mode = '0644'
-      }
-      elsif $facts['operatingsystemmajrelease'] == '6' or $facts['operatingsystem'] == 'Amazon'{
-        $service_file      = '/etc/init.d/bamboo'
-        $service_template  = 'bamboo/bamboo.init.erb'
-        $reload_systemd    = false
-        $service_file_mode = '0755'
-      }
-      else {
-        fail("${facts['osfamily']} ${facts['operatingsystemmajrelease']} not supported.")
-      }
+      $service_file      = '/usr/lib/systemd/system/bamboo.service'
+      $service_template  = 'bamboo/bamboo.service.erb'
+      $reload_systemd    = true
+      $service_file_mode = '0644'
     }
 
     'Debian': {
       $initconfig_path  = '/etc/default/bamboo'
       case $facts['operatingsystem'] {
         'Ubuntu': {
-          if versioncmp($facts['operatingsystemmajrelease'], '16') >= 0 {
-            $service_file      = '/lib/systemd/system/bamboo.service'
-            $service_template  = 'bamboo/bamboo.service.erb'
-            $reload_systemd    = true
-            $service_file_mode = '0644'
-          }
-          else {
-            $service_file      = '/etc/init.d/bamboo'
-            $service_template  = 'bamboo/bamboo.init.erb'
-            $reload_systemd    = false
-            $service_file_mode = '0755'
-          }
+          $service_file      = '/lib/systemd/system/bamboo.service'
+          $service_template  = 'bamboo/bamboo.service.erb'
+          $reload_systemd    = true
+          $service_file_mode = '0644'
         }
         'Debian': {
-          if versioncmp($facts['operatingsystemmajrelease'], '8') == 0 {
-            $service_file      = '/lib/systemd/system/bamboo.service'
-            $service_template  = 'bamboo/bamboo.service.erb'
-            $reload_systemd    = true
-            $service_file_mode = '0644'
-          }
-          elsif versioncmp($facts['operatingsystemmajrelease'], '9') >= 0 {
-            $service_file      = '/etc/systemd/system/bamboo.service'
-            $service_template  = 'bamboo/bamboo.service.erb'
-            $reload_systemd    = true
-            $service_file_mode = '0644'
-          }
-          else {
-            $service_file      = '/etc/init.d/bamboo'
-            $service_template  = 'bamboo/bamboo.init.erb'
-            $reload_systemd    = false
-            $service_file_mode = '0755'
-          }
+          $service_file      = '/etc/systemd/system/bamboo.service'
+          $service_template  = 'bamboo/bamboo.service.erb'
+          $reload_systemd    = true
+          $service_file_mode = '0644'
         }
         default: {
           fail("The bamboo module is not supported on ${facts['operatingsystem']}")
