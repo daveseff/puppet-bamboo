@@ -34,21 +34,20 @@ class bamboo::configure {
       ),
       "'"
     )
-    $_changes = concat($changes, $_proxy)
+    concat($changes, $_proxy)
   }
   else {
     $_proxy   = undef
-    $_changes = $changes
   }
 
   if $bamboo::use_mod_jk == true {
-    $_changes = concat($changes, 'set Server/Service/Connector[#attribute/protocol = "AJP/1.3"]/#attribute/')
+    concat($changes, 'set Server/Service/Connector[#attribute/protocol = "AJP/1.3"]/#attribute/')
   }
 
   augeas { "${bamboo::real_appdir}/conf/server.xml":
     lens    => 'Xml.lns',
     incl    => "${bamboo::real_appdir}/conf/server.xml",
-    changes => $_changes,
+    changes => $changes,
   }
 
 }
