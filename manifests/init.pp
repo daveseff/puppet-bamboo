@@ -245,6 +245,7 @@ class bamboo (
   Optional[Stdlib::Unixpath]             $appdir                = undef,
   Stdlib::Unixpath                       $homedir               = '/var/local/bamboo',
   String                                 $context_path          = '',
+  Boolean                                $use_mod_jk            = false,
   Variant[Pattern[/^\d+$/],Stdlib::Port] $tomcat_port           = 8085,
   Variant[Pattern[/^\d+$/],Integer]      $max_threads           = 150,
   Variant[Pattern[/^\d+$/],Integer]      $min_spare_threads     = 25,

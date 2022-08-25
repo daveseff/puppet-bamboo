@@ -41,6 +41,10 @@ class bamboo::configure {
     $_changes = $changes
   }
 
+  if $bamboo::use_mod_jk == true {
+    $_changes = concat($changes, 'set Server/Service/Connector[#attribute/protocol = "AJP/1.3"]/#attribute/')
+  }
+
   augeas { "${bamboo::real_appdir}/conf/server.xml":
     lens    => 'Xml.lns',
     incl    => "${bamboo::real_appdir}/conf/server.xml",
